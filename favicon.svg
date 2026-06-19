@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <defs>
+    <!-- Rich Gold Gradients -->
+    <radialGradient id="waxGrad" cx="50%" cy="50%" r="50%" fx="30%" fy="30%">
+      <stop offset="0%" stop-color="#F2D79F" /> <!-- Highlight -->
+      <stop offset="70%" stop-color="#E0C58F" /> <!-- Mid -->
+      <stop offset="100%" stop-color="#B78C3A" /> <!-- Shadow -->
+    </radialGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="130%" height="130%">
+      <feDropShadow dx="1.5" dy="2" stdDeviation="2" flood-color="#000000" flood-opacity="0.3" />
+    </filter>
+  </defs>
+
+  <!-- Wax shape -->
+  <path d="M 50 6 C 24 6 7 21 5 48 C 3 73 21 93 47 94 C 74 95 95 76 95 50 C 95 23 76 6 50 6 Z" fill="url(#waxGrad)" filter="url(#shadow)" />
+
+  <!-- Circular Rim Borders -->
+  <circle cx="50" cy="50" r="37" fill="none" stroke="#B78C3A" stroke-width="2.5" opacity="0.9" />
+  
+  <!-- Sunken Center stamp area -->
+  <circle cx="50" cy="50" r="34" fill="url(#waxGrad)" opacity="0.9" />
+
+  <!-- Monogram SP -->
+  <g transform="translate(50, 52) scale(1)">
+    <text font-family="'Cormorant Garamond', 'Playfair Display', 'Georgia', serif" 
+          font-size="33" 
+          font-weight="bold" 
+          fill="#5C451D" 
+          text-anchor="middle" 
+          letter-spacing="-1.5">SP</text>
+  </g>
+  
+  <!-- Highlights -->
+  <path d="M 50 9 C 27 9 12 24 10 49" fill="none" stroke="#FFEBB8" stroke-width="2" opacity="0.4" stroke-linecap="round" />
+</svg>

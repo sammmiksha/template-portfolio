@@ -1,0 +1,1140 @@
+/* ==========================================================================
+   DESIGN TOKENS & SYSTEM
+   ========================================================================== */
+:root {
+  /* Color Palette (60-25-10-5 Rule) */
+  --royal-blue: #112250;
+  /* 60%: Envelope, Desk Backdrop, Borders */
+  --royal-blue-light: #1b2f6c;
+  /* Secondary blue */
+  --royal-blue-dark: #08112b;
+  /* Shadow/contrast blue */
+  --swan-wing: #F5F0E9;
+  /* 25%: Premium Document Paper */
+
+  /* Rich Warm Gold Metallic Gradients (10%) */
+  --gold-highlight: #F2D79F;
+  /* Highlights */
+  --quicksand-gold: #E0C58F;
+  /* Mid tone */
+  --gold-shadow: #B78C3A;
+  /* Shadows */
+
+  --sapphire: #3C507D;
+  /* 5%: Text Accents, Details, Borders, Hover States */
+  --shellstone: #D9CBC2;
+  /* Paper Edge Shadows and Depth */
+  --text-dark: #1b263b;
+  /* Neutral Charcoal for body text */
+
+  /* Typography */
+  --font-heading: 'Cormorant Garamond', serif;
+  --font-body: 'Inter', sans-serif;
+  --font-letter: 'Playfair Display', serif;
+
+  /* Transitions */
+  --transition-smooth: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+  --transition-envelope: all 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ==========================================================================
+   RESET & BASICS
+   ========================================================================== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--royal-blue-dark);
+  color: var(--text-dark);
+  font-family: var(--font-body);
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Custom Scrollbar for Luxury Feel */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--royal-blue-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--sapphire);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--quicksand-gold);
+}
+
+/* ==========================================================================
+   LUXURY ENVIRONMENT BACKDROP
+   ========================================================================== */
+.desk-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 50% 50%, var(--royal-blue-light) 0%, var(--royal-blue-dark) 80%);
+  z-index: 1;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Spotlight & Shadow Vignette */
+.desk-spotlight {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 50% 45%, rgba(243, 223, 189, 0.12) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Canvas overlay for floating dust */
+#dustCanvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 3;
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   STATE 1: THE CLOSED ENVELOPE
+   ========================================================================== */
+.envelope-stage {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: 800px;
+  height: 520px;
+  perspective: 1500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: var(--transition-envelope);
+  padding: 20px;
+}
+
+.envelope {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: var(--royal-blue);
+  /* Touchable Paper Texture on Envelope */
+  background-image:
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.025'/%3E%3C/svg%3E"),
+    radial-gradient(circle at 50% 50%, var(--royal-blue-light) 0%, var(--royal-blue) 90%);
+  border-radius: 6px;
+  box-shadow: 0 35px 85px rgba(0, 0, 0, 0.7),
+    0 0 0 1px rgba(242, 215, 159, 0.25) inset,
+    0 0 30px rgba(0, 0, 0, 0.4) inset;
+  transform-style: preserve-3d;
+  transition: var(--transition-envelope);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Gold Embossed Envelope Border */
+.envelope::before {
+  content: '';
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  right: 15px;
+  bottom: 15px;
+  border: 1px solid var(--quicksand-gold);
+  border-radius: 4px;
+  opacity: 0.55;
+  pointer-events: none;
+  z-index: 2;
+  box-shadow: 0 0 5px rgba(224, 197, 143, 0.15);
+}
+
+/* Envelope Internal Peek of Cream Paper */
+.envelope-peek {
+  position: absolute;
+  top: -3px;
+  /* 3mm paper peek */
+  left: 30px;
+  right: 30px;
+  height: 20px;
+  background-color: var(--swan-wing);
+  border-radius: 3px 3px 0 0;
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.15);
+  opacity: 0.9;
+  z-index: 1;
+  transition: var(--transition-smooth);
+}
+
+/* 
+   Envelope Flaps - Adjusted coordinates and drop shadow filters.
+   To prevent shadows from being clipped by the clip-path polygon,
+   each flap is slightly oversized (60% instead of 50%), and the
+   clip-path coordinates are adjusted so that the visible boundary
+   is centered, leaving the remaining 10% space for the drop shadow.
+*/
+.envelope-flap-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60%;
+  /* Oversized by 10% for shadow */
+  background-color: var(--royal-blue);
+  background-image:
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.025'/%3E%3C/svg%3E"),
+    linear-gradient(to bottom, var(--royal-blue-light) 0%, var(--royal-blue) 100%);
+  clip-path: polygon(0 0, 100% 0, 50% 83.33%);
+  /* Tip is exactly at 50% envelope height */
+  transform-origin: top center;
+  z-index: 6;
+  transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+  filter: drop-shadow(0 6px 8px rgba(0, 0, 0, 0.35));
+  border-bottom: 2.5px solid var(--quicksand-gold);
+}
+
+.envelope-flap-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 60%;
+  /* Oversized by 10% for shadow */
+  background-color: #0e1b40;
+  clip-path: polygon(0 100%, 100% 100%, 50% 16.67%);
+  /* Tip is exactly at 50% envelope height */
+  z-index: 5;
+  opacity: 0.95;
+  filter: drop-shadow(0 -5px 8px rgba(0, 0, 0, 0.3));
+}
+
+.envelope-flap-left {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 60%;
+  /* Oversized by 10% for shadow */
+  height: 100%;
+  background-color: #0c183b;
+  clip-path: polygon(0 0, 83.33% 50%, 0 100%);
+  /* Tip is exactly at 50% envelope width */
+  z-index: 4;
+  opacity: 0.97;
+  filter: drop-shadow(5px 0 8px rgba(0, 0, 0, 0.25));
+}
+
+.envelope-flap-right {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 60%;
+  /* Oversized by 10% for shadow */
+  height: 100%;
+  background-color: #0c183b;
+  clip-path: polygon(100% 0, 16.67% 50%, 100% 100%);
+  /* Tip is exactly at 50% envelope width */
+  z-index: 4;
+  opacity: 0.97;
+  filter: drop-shadow(-5px 0 8px rgba(0, 0, 0, 0.25));
+}
+
+/* Envelope Info Center Text */
+.envelope-info {
+  position: absolute;
+  top: 60%;
+  width: 100%;
+  text-align: center;
+  color: var(--swan-wing);
+  z-index: 5;
+  pointer-events: none;
+  transform: translateY(-50%);
+  padding: 0 40px;
+}
+
+.envelope-title {
+  font-family: var(--font-heading);
+  font-size: 42px;
+  font-weight: 300;
+  letter-spacing: 2.5px;
+  color: var(--swan-wing);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* ==========================================================================
+   THE BLUE PHYSICAL WAX SEAL (Interaction Hub)
+   ========================================================================= */
+.wax-seal-wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  /* Shift downward by -20% of its size to overlap the flap and envelope body more */
+  transform: translate(-50%, -20%) rotate(5deg);
+  z-index: 12;
+  width: 85px;
+  /* 15% smaller (was 100px) */
+  height: 85px;
+  /* 15% smaller (was 100px) */
+  cursor: pointer;
+  pointer-events: auto;
+  user-select: none;
+}
+
+/* Absolute left/right halves for cracking action */
+.wax-seal-half {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  /* Slower transition for a physical, natural breaking slide off */
+  transition: transform 1.2s cubic-bezier(0.25, 1, 0.5, 1),
+    opacity 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.wax-seal-half img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.45));
+  -webkit-user-drag: none;
+}
+
+.seal-left {
+  clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);
+  transform-origin: left center;
+}
+
+.seal-right {
+  clip-path: polygon(50% 0, 100% 0, 100% 100%, 50% 100%);
+  transform-origin: right center;
+}
+
+/* ==========================================================================
+   STATE 2: THE ENVELOPE OPENING ANIMATION SEQUENCE
+   ========================================================================== */
+
+/* 1. Seal splits/cracks apart (Slides down and away physically) */
+.envelope-stage.seal-broken .seal-left {
+  transform: translateX(-45px) translateY(20px) rotate(-18deg);
+  opacity: 0;
+}
+
+.envelope-stage.seal-broken .seal-right {
+  transform: translateX(45px) translateY(20px) rotate(18deg);
+  opacity: 0;
+}
+
+/* 2. Top flap opens after seal splits */
+.envelope-stage.flap-open .envelope-flap-top {
+  transform: rotateX(180deg);
+  z-index: 3;
+  /* Positions behind paper during slide out */
+}
+
+/* Hide peek paper when sliding out */
+.envelope-stage.flap-open .envelope-peek {
+  opacity: 0;
+}
+
+/* ==========================================================================
+   STATE 3: THE CORPORATE DOSSIER (Single Continuous Page)
+   ========================================================================== */
+.dossier-stage {
+  position: relative;
+  z-index: 20;
+  width: 100%;
+  max-width: 900px;
+  margin: 60px auto;
+  opacity: 0;
+  visibility: hidden;
+  /* Start lower and smaller to slide up and unfold */
+  transform: translateY(150px) scale(0.9);
+  transition: transform 1.2s cubic-bezier(0.25, 0.8, 0.25, 1),
+    opacity 1.0s ease,
+    visibility 1.0s ease;
+  display: none;
+}
+
+/* Sequential transition states triggered by Javascript */
+.dossier-stage.active {
+  display: block;
+}
+
+/* Stage 1: Paper sliding up out of envelope */
+.dossier-stage.paper-slide {
+  opacity: 0.4;
+  visibility: visible;
+  transform: translateY(80px) scale(0.92);
+}
+
+/* Stage 2: Paper settling and unfolding */
+.dossier-stage.paper-unfold {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+}
+
+/* Stage 3: Content fades in after page unfolds */
+.dossier-content {
+  position: relative;
+  z-index: 2;
+  opacity: 0;
+  transition: opacity 1.0s ease;
+}
+
+.dossier-stage.content-fade .dossier-content {
+  opacity: 1;
+}
+
+/* Tactile 3-Layer Paper Stack Setup */
+.paper-stack {
+  position: relative;
+  width: 100%;
+  border-radius: 4px;
+}
+
+/* Back Shadow Sheet 2 (Deepest) */
+.paper-stack::before {
+  content: '';
+  position: absolute;
+  top: 8px;
+  left: -6px;
+  width: calc(100% + 12px);
+  height: 100%;
+  background-color: var(--swan-wing);
+  border-radius: 4px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  transform: rotate(-0.5deg);
+  opacity: 0.85;
+  z-index: -2;
+}
+
+/* Middle Shadow Sheet 1 */
+.paper-stack::after {
+  content: '';
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: calc(100% - 8px);
+  height: 100%;
+  background-color: var(--swan-wing);
+  border-radius: 4px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  transform: rotate(0.4deg);
+  opacity: 0.95;
+  z-index: -1;
+}
+
+/* Main Dossier Container (Top Sheet) */
+.dossier-page {
+  width: 100%;
+  background-color: var(--swan-wing);
+  color: var(--text-dark);
+  border-radius: 4px;
+  padding: 95px 80px 160px 80px;
+  /* Increased bottom padding to fit absolute visual footer */
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2),
+    0 0 40px rgba(0, 0, 0, 0.05) inset;
+  position: relative;
+  z-index: 1;
+  overflow: visible;
+  /* CRITICAL: Prevent grid-breaking portrait cutout from clipping! */
+}
+
+/* 
+   Subtly Overlay the paper texture as a background layer with low opacity.
+   This resolves the "overpowering texture" issue, boosting text contrast 
+   while maintaining the luxury stationery aesthetic.
+*/
+.dossier-page::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("assets/papertexture.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.14;
+  /* Reduced intensity to ~14% to ensure crisp text contrast */
+  z-index: -1;
+  pointer-events: none;
+  border-radius: 4px;
+}
+
+/* Embossed SP Monogram watermark behind text content */
+.dossier-watermark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 480px;
+  height: 480px;
+  opacity: 0.06;
+  /* Strengthened opacity to be visible but elegant */
+  pointer-events: none;
+  z-index: 0;
+  color: var(--royal-blue);
+  mix-blend-mode: multiply;
+}
+
+.dossier-watermark svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* Narrative Section Paragraphs */
+.section-narrative {
+  font-family: var(--font-body);
+  font-size: 14.5px;
+  line-height: 1.8;
+  color: var(--text-dark);
+  margin-bottom: 30px;
+  font-style: italic;
+  opacity: 0.9;
+}
+
+.group-narrative {
+  font-family: var(--font-body);
+  font-size: 14.5px;
+  line-height: 1.75;
+  color: var(--text-dark);
+  margin-bottom: 25px;
+  opacity: 0.85;
+}
+
+/* Dossier Chapter Dividers */
+.dossier-chapter-header {
+  font-family: var(--font-heading);
+  font-size: 28px;
+  font-weight: 500;
+  color: var(--royal-blue);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-top: 60px;
+  margin-bottom: 30px;
+  display: flex;
+  align-items: center;
+  text-shadow: 0.5px 0.5px 0px #ffffff;
+}
+
+.dossier-chapter-header span {
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--sapphire);
+  margin-right: 15px;
+  letter-spacing: 0px;
+}
+
+.dossier-chapter-header::after {
+  content: '';
+  flex-grow: 1;
+  height: 1.5px;
+  background-color: var(--quicksand-gold);
+  margin-left: 20px;
+  opacity: 0.7;
+  box-shadow: 0 0.5px 0 #ffffff;
+}
+
+/* ==========================================================================
+   CHAPTER 01: MY STORY
+   ========================================================================== */
+.sec-intro {
+  margin-bottom: 80px;
+  position: relative;
+}
+
+.intro-grid {
+  display: grid;
+  /* Sized columns so the story (left) has more room and the portrait is secondary */
+  grid-template-columns: 1.35fr 0.65fr;
+  gap: 40px;
+  position: relative;
+  align-items: center;
+}
+
+.intro-salutation {
+  font-family: var(--font-letter);
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--royal-blue);
+  margin-bottom: 20px;
+  letter-spacing: 0.5px;
+}
+
+.intro-headline {
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.65;
+  color: var(--sapphire);
+  margin-bottom: 20px;
+}
+
+.intro-summary {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.8;
+  color: var(--text-dark);
+  text-align: justify;
+}
+
+/* Editorial Portrait: scaled down by 25% (max-width: 210px) to balance layout */
+.editorial-portrait {
+  position: relative;
+  width: 100%;
+  max-width: 210px;
+  /* Reduced by ~25% */
+  margin-left: auto;
+  z-index: 3;
+}
+
+.editorial-portrait img {
+  width: 110%;
+  height: auto;
+  display: block;
+  position: relative;
+  right: -12px;
+  /* Breaks page margin grid slightly */
+  filter: drop-shadow(-8px 8px 16px rgba(0, 0, 0, 0.16));
+  pointer-events: none;
+}
+
+/* Component-Anchored Sticker 1: Army Bomb (Left margin, sized up by 15-20% to 145px width) */
+.sec-intro .sticker-army-bomb {
+  top: -30px;
+  left: -60px;
+  width: 70px;
+  transform: rotate(-12deg);
+}
+
+/* ==========================================================================
+   CENTERPIECE CALLIGRAPHIC SECTION (Visual Landmark)
+   ========================================================================== */
+.dossier-centerpiece {
+  text-align: center;
+  margin: 120px auto;
+  /* Luxury spacing/silence */
+  max-width: 700px;
+  padding: 40px 0;
+  position: relative;
+  z-index: 2;
+}
+
+.centerpiece-title {
+  font-family: var(--font-heading);
+  font-size: 42px;
+  /* Bold & Centered landmark */
+  font-weight: 400;
+  color: var(--royal-blue);
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.centerpiece-quote {
+  font-family: var(--font-letter);
+  font-size: 24px;
+  font-style: italic;
+  line-height: 1.65;
+  color: var(--sapphire);
+  margin-bottom: 25px;
+}
+
+.centerpiece-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.centerpiece-divider::before,
+.centerpiece-divider::after {
+  content: '';
+  width: 100px;
+  height: 1.5px;
+  background-color: var(--quicksand-gold);
+  margin: 0 20px;
+  opacity: 0.7;
+}
+
+.divider-diamond {
+  color: var(--quicksand-gold);
+  font-size: 14px;
+}
+
+/* ==========================================================================
+   STICKERS BASE CONFIG
+   ========================================================================== */
+.sticker {
+  position: absolute;
+  z-index: 15;
+  filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.22));
+  transition: transform 0.4s ease, filter 0.4s ease;
+  pointer-events: auto;
+  opacity: 0.93;
+  cursor: grab;
+}
+
+.sticker:active {
+  cursor: grabbing;
+}
+
+.sticker:hover {
+  transform: scale(1.05) rotate(0deg) !important;
+  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.3));
+  opacity: 1;
+}
+
+/* ==========================================================================
+   CHAPTER 02: ACADEMIC FOUNDATIONS
+   ========================================================================== */
+.sec-academic {
+  margin-bottom: 80px;
+  position: relative;
+}
+
+.dossier-narrative-list {
+  list-style-type: none;
+  padding-left: 0;
+  margin-top: 15px;
+}
+
+.dossier-narrative-list li {
+  font-family: var(--font-body);
+  font-size: 14.5px;
+  line-height: 1.85;
+  color: var(--text-dark);
+  margin-bottom: 14px;
+  position: relative;
+  padding-left: 20px;
+}
+
+.dossier-narrative-list li::before {
+  content: '▪';
+  position: absolute;
+  left: 0;
+  color: var(--quicksand-gold);
+  font-size: 10px;
+  top: -1px;
+}
+
+/* Dossier Clean Dividers (Removed 50% borders - spacing and margins handle grouping) */
+.dossier-group {
+  margin-bottom: 100px;
+  /* High spacing for luxury breathing room between subsections */
+}
+
+.dossier-group:last-child {
+  margin-bottom: 0;
+}
+
+.dossier-sub-header {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--sapphire);
+  letter-spacing: 2px;
+  margin-bottom: 20px;
+  /* Increased margin for whitespace separation */
+  display: flex;
+  align-items: center;
+}
+
+/* Removed border lines from sub-headers to reduce line count by 50% */
+.dossier-sub-header::after {
+  display: none;
+}
+
+/* Timeline Layout */
+.timeline-item {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 6px;
+  padding: 12px 0 16px 0;
+  border-bottom: 1px dashed rgba(60, 80, 125, 0.15);
+}
+
+.timeline-item:last-child {
+  border-bottom: none;
+}
+
+.timeline-title {
+  font-family: var(--font-heading);
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--royal-blue);
+}
+
+.timeline-institution {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--sapphire);
+}
+
+/* Empty spacer wrapper (replaced horizontal hr divider with whitespace) */
+.dossier-divider-wrapper {
+  position: relative;
+  margin: 45px 0;
+  height: 10px;
+}
+
+.dossier-divider {
+  display: none;
+  /* Removed divider line */
+}
+
+/* Component-Anchored Sticker 2: Magic Shop Ticket (+15-20% size increase to 270px) */
+.sec-academic .sticker-magic-ticket {
+  bottom: 20px;
+  right: -35px;
+  width: 170px;
+  transform: rotate(8deg);
+  z-index: 10;
+}
+
+/* ==========================================================================
+   CHAPTER 03: PROFESSIONAL EXPERIENCE
+   ========================================================================== */
+.sec-record {
+  margin-bottom: 80px;
+  position: relative;
+}
+
+/* Set strong vertical spacing specifically between sub-sections in Section 03 */
+.sec-record .dossier-group {
+  margin-bottom: 100px;
+}
+
+.sec-record .dossier-group:last-child {
+  margin-bottom: 0;
+}
+
+.experience-desc {
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--text-dark);
+  margin-top: 6px;
+}
+
+/* Skills Checklist Styling */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.skills-item {
+  display: flex;
+  align-items: center;
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--text-dark);
+}
+
+.skills-item svg {
+  width: 16px;
+  height: 16px;
+  margin-right: 10px;
+  fill: var(--sapphire);
+}
+
+/* Areas of Interest (5 Items) */
+.interests-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  margin-top: 15px;
+  margin-bottom: 30px;
+}
+
+.interest-item {
+  display: flex;
+  align-items: center;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--royal-blue);
+}
+
+.interest-item::before {
+  content: '✦';
+  color: var(--quicksand-gold);
+  margin-right: 10px;
+  font-size: 12px;
+}
+
+/* Languages List */
+.languages-list {
+  display: flex;
+  gap: 25px;
+  margin-top: 12px;
+}
+
+.language-pill {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--sapphire);
+  background-color: rgba(60, 80, 125, 0.08);
+  padding: 4px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(60, 80, 125, 0.12);
+}
+
+/* ==========================================================================
+   CHAPTER 04: LET'S CONNECT
+   ========================================================================== */
+.sec-contact {
+  margin-bottom: 40px;
+  position: relative;
+}
+
+/* Contact Links */
+.contact-links {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: var(--text-dark);
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 500;
+  transition: var(--transition-smooth);
+}
+
+.contact-item:hover {
+  color: var(--sapphire);
+  transform: translateX(3px);
+}
+
+.contact-item svg {
+  width: 18px;
+  height: 18px;
+  margin-right: 12px;
+  fill: var(--sapphire);
+}
+
+/* Personal Closing Motto (Gold Borders, Clean Script Text) */
+.motto-container {
+  margin: 50px auto 10px auto;
+  text-align: center;
+  max-width: 500px;
+  border-top: 1.5px solid var(--quicksand-gold);
+  border-bottom: 1.5px solid var(--quicksand-gold);
+  padding: 24px 0;
+  box-shadow: 0 0.5px 0 #ffffff, inset 0 0.5px 0 #ffffff;
+}
+
+.motto-text {
+  font-family: var(--font-letter);
+  font-size: 18px;
+  font-style: italic;
+  font-weight: 500;
+  color: var(--royal-blue);
+  line-height: 1.7;
+}
+
+/* ==========================================================================
+   MAKER CREDIT FOOTER (Subtle, Clean Container & Always Visible)
+   ========================================================================== */
+.maker-credit {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgba(27, 38, 59, 0.04);
+  /* Distinct, slightly darker paper ending */
+  border-top: 1px solid rgba(60, 80, 125, 0.12);
+  padding: 40px 80px;
+  font-family: var(--font-body);
+  font-size: 12px;
+  opacity: 0.55;
+  z-index: 10;
+  text-align: center;
+}
+
+.footer-wrap {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.maker-text {
+  color: var(--text-dark);
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+
+.maker-links {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  align-items: center;
+}
+
+.maker-link {
+  color: var(--royal-blue);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.maker-link:hover {
+  color: var(--sapphire);
+}
+
+.bullet-divider {
+  color: var(--quicksand-gold);
+  font-weight: bold;
+}
+
+/* Component-Anchored Sticker 3: Bangtan Doors (Left margin of footer, +15-20% size to 145px) */
+.footer-wrap .sticker-bangtan {
+  bottom: -20px;
+  left: 20px;
+  width: 145px;
+  transform: rotate(-10deg);
+}
+
+/* ==========================================================================
+   SCROLL REVEAL CLASS FOR INTERSECTIONOBSERVER
+   ========================================================================== */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: transform 0.8s cubic-bezier(0.25, 0.8, 0.25, 1),
+    opacity 0.8s ease;
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ==========================================================================
+   MEDIA QUERIES (Mobile Spacing Controls)
+   ========================================================================== */
+@media (max-width: 768px) {
+
+  /* Closed Envelope Adjustments */
+  .envelope-stage {
+    width: 95%;
+    height: 380px;
+  }
+
+  .envelope-title {
+    font-size: 28px;
+  }
+
+  .wax-seal-wrapper {
+    width: 65px;
+    height: 65px;
+  }
+
+  /* Single Column Stacking for Section 01 */
+  .intro-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  /* Editorial Portrait adjustments for mobile grid */
+  .editorial-portrait {
+    max-width: 180px;
+    /* Reduced further on mobile */
+    margin: 20px auto 0 auto;
+  }
+
+  .editorial-portrait img {
+    width: 100%;
+    right: 0;
+    /* Keep it centered and bounded on small screens */
+  }
+
+  .dossier-centerpiece {
+    margin: 80px auto;
+    padding: 20px 0;
+  }
+
+  .centerpiece-title {
+    font-size: 30px;
+  }
+
+  .centerpiece-quote {
+    font-size: 18px;
+  }
+
+  /* Dossier Page Spacing */
+  .dossier-page {
+    padding: 50px 30px 180px 30px;
+    /* Adjust bottom padding for mobile footer */
+  }
+
+  .dossier-watermark {
+    width: 250px;
+    opacity: 0.04;
+  }
+
+  .skills-grid,
+  .interests-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .maker-credit {
+    padding: 25px 20px;
+  }
+
+  .sec-intro .sticker-army-bomb {
+    width: 70px;
+    left: -10px;
+    top: -15px;
+  }
+
+  .sec-academic .sticker-magic-ticket {
+    width: 150px;
+    right: -10px;
+    bottom: 10px;
+  }
+
+  .footer-wrap .sticker-bangtan {
+    width: 75px;
+    left: 10px;
+    bottom: -10px;
+  }
+}

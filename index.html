@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Primary SEO Meta Tags -->
+  <title>Samiksha Pedenekar | Portfolio Dossier</title>
+  <meta name="title" content="Samiksha Pedenekar | Portfolio Dossier">
+  <meta name="description"
+    content="Professional portfolio and candidate dossier of Samiksha Pedenekar. Focused on Corporate Law, Governance, and compliance.">
+  <meta name="author" content="Samiksha Pedenekar">
+
+  <!-- Open Graph / Facebook Meta Tags -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://samikshapedenekar.netlify.app/">
+  <meta property="og:title" content="Samiksha Pedenekar | Portfolio Dossier">
+  <meta property="og:description"
+    content="Professional portfolio and candidate dossier of Samiksha Pedenekar. Focused on Corporate Law, Governance, and compliance.">
+  <meta property="og:image" content="https://samikshapedenekar.netlify.app/assets/portrait.png">
+
+  <!-- Twitter Meta Tags -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://samikshapedenekar.netlify.app/">
+  <meta property="twitter:title" content="Samiksha Pedenekar | Portfolio Dossier">
+  <meta property="twitter:description"
+    content="Professional portfolio and candidate dossier of Samiksha Pedenekar. Focused on Corporate Law, Governance, and compliance.">
+  <meta property="twitter:image" content="https://samikshapedenekar.netlify.app/assets/portrait.png">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+  <!-- Google Fonts: Cormorant Garamond (Headings), Playfair Display (Letter Headers), Inter (Body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap"
+    rel="stylesheet">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+  <!-- Background Desktop Canvas Overlay -->
+  <div class="desk-container">
+    <canvas id="dustCanvas"></canvas>
+    <div class="desk-spotlight"></div>
+
+    <!-- STAGE 1: CLOSED ENVELOPE -->
+    <div class="envelope-stage" id="envelopeStage">
+      <div class="envelope" id="envelopeContainer">
+        <!-- 2-3mm paper edge peek -->
+        <div class="envelope-peek"></div>
+
+        <!-- Interactive Wax Seal Wrapper (Split halves for cracking action) -->
+        <div class="wax-seal-wrapper" id="waxSeal" role="button"
+          aria-label="Wax Seal. Click to open candidate dossier.">
+          <div class="wax-seal-half seal-left">
+            <img src="assets/stampblue.png" alt="Wax Seal Left Half">
+          </div>
+          <div class="wax-seal-half seal-right">
+            <img src="assets/stampblue.png" alt="Wax Seal Right Half">
+          </div>
+        </div>
+
+        <!-- Flaps -->
+        <div class="envelope-flap-top"></div>
+        <div class="envelope-flap-bottom"></div>
+        <div class="envelope-flap-left"></div>
+        <div class="envelope-flap-right"></div>
+
+        <!-- Closed state information (Minimalist: Name only) -->
+        <div class="envelope-info">
+          <br>
+          <br>
+          <br>
+          <br>
+          <h1 class="envelope-title">Samiksha Pedenekar</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STAGE 3: THE CORPORATE DOSSIER (Single Continuous Page) -->
+  <main class="dossier-stage" id="dossierStage">
+    <div class="paper-stack">
+      <article class="dossier-page">
+
+        <!-- Embossed SP Monogram Watermark Background -->
+        <div class="dossier-watermark" aria-hidden="true">
+          <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="100" cy="100" r="85" fill="none" stroke="currentColor" stroke-width="1.5"
+              stroke-dasharray="4 4" />
+            <circle cx="100" cy="100" r="78" fill="none" stroke="currentColor" stroke-width="0.5" />
+            <text font-family="'Cormorant Garamond', 'Georgia', serif" font-size="64" font-weight="300"
+              fill="currentColor" text-anchor="middle" x="100" y="112" letter-spacing="2">SP</text>
+            <text font-family="'Inter', sans-serif" font-size="8" font-weight="600" fill="currentColor"
+              text-anchor="middle" x="100" y="142" letter-spacing="4">COMPLIANCE</text>
+          </svg>
+        </div>
+
+        <div class="dossier-content">
+          <!-- CHAPTER 01: MY STORY -->
+          <section class="sec-intro reveal">
+            <h2 class="dossier-chapter-header"><span>01</span>My Story</h2>
+
+            <div class="intro-grid">
+              <div class="intro-left">
+                <div class="intro-salutation">Executive Summary</div>
+                <p class="intro-headline">
+                  Pursuing corporate governance excellence and secretarial compliance with integrity and precision.
+                </p>
+                <p class="intro-summary">
+                  I am Samiksha Pedenekar, a dedicated CS Executive student seeking a secretarial internship. I aim to
+                  apply my knowledge of corporate law and compliance to support organizational governance frameworks
+                  while training to become a Company Secretary.
+                </p>
+              </div>
+
+              <!-- Editorial Portrait Cutout breaking the grid slightly -->
+              <div class="editorial-portrait">
+                <img src="assets/portrait.png" alt="Samiksha Pedenekar Portrait Cutout">
+              </div>
+            </div>
+
+            <!-- Scrapbook Sticker 1: Army Bomb (Lightstick) positioned as a personal accent -->
+            <img src="assets/army-bomb.png" alt="Army Bomb collectible sticker" class="sticker sticker-army-bomb"
+              loading="lazy">
+          </section>
+
+          <!-- CENTERPIECE CALLIGRAPHIC STATEMENT -->
+          <div class="dossier-centerpiece reveal">
+            <div class="centerpiece-title">Future Company Secretary</div>
+            <p class="centerpiece-quote">
+              “Dedicated to corporate governance, legal precision, and professional excellence.”
+            </p>
+            <div class="centerpiece-divider">
+              <span class="divider-diamond">✦</span>
+            </div>
+          </div>
+
+          <!-- CHAPTER 02: ACADEMIC FOUNDATIONS -->
+          <section class="sec-academic reveal">
+            <h2 class="dossier-chapter-header"><span>02</span>Academic Foundations</h2>
+
+            <p class="section-narrative">
+              My academic foundations combine commercial concepts with intensive regulatory studies under the Institute
+              of Company Secretaries of India. This training provides me with the intellectual toolkit to analyze
+              corporate law and navigate compliance regimes.
+            </p>
+
+            <div class="dossier-group">
+              <p class="group-narrative">
+                Concurrently, I am completing my Bachelor of Commerce (B.Com) at Mumbai University. This combined path
+                allows me to bridge corporate law with general business practice, equipping me with the analytical and
+                legal frameworks required for secretarial compliance.
+              </p>
+            </div>
+
+            <!-- Registry of Credentials -->
+            <div class="dossier-group">
+              <div class="dossier-sub-header">Formal Credentials</div>
+              <ul class="dossier-narrative-list">
+                <li><strong>CS Executive Candidate</strong> — Institute of Company Secretaries of India (ICSI)</li>
+                <li><strong>Bachelor of Commerce (Pursuing)</strong> — Mumbai University (IDOL)</li>
+                <li><strong>Commerce XII (Completed, 2023 — 70%)</strong> — New Viva College</li>
+                <li><strong>MS Excel Professional Certification</strong> — Office Administration &amp; Spreadsheet
+                  Analysis</li>
+              </ul>
+            </div>
+
+            <!-- Scrapbook Sticker 2: Magic Shop Ticket positioned as a personal accent -->
+            <img src="assets/magic-shop-ticket.png" alt="Magic Shop Ticket collectible sticker"
+              class="sticker sticker-magic-ticket" loading="lazy">
+          </section>
+
+          <!-- CHAPTER 03: PROFESSIONAL EXPERIENCE -->
+          <section class="sec-record reveal">
+            <h2 class="dossier-chapter-header"><span>03</span>Professional Experience</h2>
+
+            <p class="section-narrative">
+              My practical experience has honed my organizational skills and attention to detail. Applying systemic
+              thinking to administration and regulatory tracking equips me to execute corporate governance tasks with
+              consistency and precision.
+            </p>
+
+            <!-- Professional Experience -->
+            <div class="dossier-group">
+              <div class="dossier-sub-header">Practical Engagement</div>
+              <div class="timeline-item">
+                <div class="timeline-title">Assistant</div>
+                <div class="timeline-institution">Mindsetter private classes (June 2025 – Dec 2025)</div>
+                <p class="experience-desc">
+                  Managed operations and supported administration for classes with students ranging from Class 9th to
+                  B.Com. Handled record keeping, schedule tracking, and operational tasks.
+                </p>
+              </div>
+            </div>
+
+            <!-- Skills Sub-Section -->
+            <div class="dossier-group">
+              <div class="dossier-sub-header">Operational Capabilities</div>
+              <p class="group-narrative">
+                Throughout my academic journey, I have developed a strong foundation in corporate law, record
+                maintenance, legal research, and administrative coordination, allowing me to handle complex compliance
+                protocols.
+              </p>
+
+              <div class="skills-grid">
+                <div class="skills-item">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+                  </svg>
+                  Microsoft Excel &amp; Spreadsheets
+                </div>
+                <div class="skills-item">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+                  </svg>
+                  Microsoft Word &amp; PowerPoint
+                </div>
+                <div class="skills-item">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+                  </svg>
+                  Internet &amp; Legal Research
+                </div>
+                <div class="skills-item">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+                  </svg>
+                  Documentation &amp; Record Keeping
+                </div>
+                <div class="skills-item">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+                  </svg>
+                  Data Entry &amp; Accuracy Check
+                </div>
+                <div class="skills-item">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+                  </svg>
+                  Communication &amp; Time Management
+                </div>
+              </div>
+            </div>
+
+            <!-- Areas of Interest (Corporate Focus) -->
+            <div class="dossier-group">
+              <div class="dossier-sub-header">Regulatory &amp; Corporate Focus</div>
+              <div class="interests-grid">
+                <div class="interest-item">Corporate Compliance</div>
+                <div class="interest-item">Secretarial Practice</div>
+                <div class="interest-item">Corporate Governance</div>
+                <div class="interest-item">Legal Documentation</div>
+                <div class="interest-item">Business Administration</div>
+              </div>
+            </div>
+
+            <!-- Languages Sub-Section -->
+            <div class="dossier-group">
+              <div class="dossier-sub-header">Linguistic Facility</div>
+              <div class="languages-list">
+                <span class="language-pill">English</span>
+                <span class="language-pill">Hindi</span>
+                <span class="language-pill">Marathi</span>
+              </div>
+            </div>
+          </section>
+
+          <!-- CHAPTER 04: LET'S CONNECT -->
+          <section class="sec-contact reveal">
+            <h2 class="dossier-chapter-header"><span>04</span>Let's Connect</h2>
+
+            <p class="section-narrative">
+              Please feel free to reach out to discuss internship opportunities, compliance projects, or professional
+              collaboration.
+            </p>
+
+            <!-- Contact Details Sub-Section -->
+            <div class="dossier-group">
+              <div class="dossier-sub-header">Get In Touch</div>
+              <div class="contact-links">
+                <!-- Phone -->
+                <a href="tel:+918888275506" class="contact-item"
+                  aria-label="Call Samiksha Pedenekar at +91 88882 75506">
+                  <svg viewBox="0 0 24 24">
+                    <path
+                      d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
+                  </svg>
+                  +91 88882 75506
+                </a>
+                <!-- Email -->
+                <a href="mailto:samikshap605@gmail.com" class="contact-item"
+                  aria-label="Email Samiksha Pedenekar at samikshap605@gmail.com">
+                  <svg viewBox="0 0 24 24">
+                    <path
+                      d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+                  </svg>
+                  samikshap605@gmail.com
+                </a>
+                <!-- LinkedIn -->
+                <a href="https://www.linkedin.com/in/samiksha-pedenekar-18965730b" target="_blank" class="contact-item"
+                  aria-label="Visit Samiksha Pedenekar's LinkedIn profile">
+                  <svg viewBox="0 0 24 24">
+                    <path
+                      d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z" />
+                  </svg>
+                  linkedin.com/in/samiksha-pedenekar-18965730b
+                </a>
+              </div>
+            </div>
+
+            <!-- Personal Closing Motto Container -->
+            <div class="motto-container">
+              <blockquote class="motto-text">
+                "Building a career through compliance, consistency, and continuous learning."
+              </blockquote>
+            </div>
+          </section>
+        </div>
+
+        <!-- MAKER CREDIT FOOTER (Subtle, Clean Container & Always Visible) -->
+        <footer class="maker-credit">
+          <div class="footer-wrap">
+            <div class="maker-text">Designed &amp; Developed by Samiksha Patil</div>
+            <div class="maker-links">
+              <a href="https://github.com/sammmiksha" target="_blank" class="maker-link"
+                aria-label="Visit Samiksha Patil's GitHub Profile">GitHub</a>
+              <span class="bullet-divider">·</span>
+              <a href="https://www.linkedin.com/in/sammmikshapatil" target="_blank" class="maker-link"
+                aria-label="Visit Samiksha Patil's LinkedIn Profile">LinkedIn</a>
+            </div>
+            <!-- Scrapbook Sticker 3: Bangtan Doors positioned next to footer -->
+            <img src="assets/bangtan-sticker.png" alt="Bangtan Doors logo sticker" class="sticker sticker-bangtan"
+              loading="lazy">
+          </div>
+        </footer>
+
+      </article>
+    </div>
+  </main>
+
+  <!-- Script Controller -->
+  <script src="script.js"></script>
+</body>
+
+</html>
